@@ -7,7 +7,7 @@ export type Thead = {
 export interface Props {
     thead?: Thead;
 
-    data?: any[];
+    data?: object[] | (() => object[]);
 
     caption?: string | number | (() => any);
     viewSwitchAt?: number;
@@ -26,6 +26,8 @@ const Component = (props: Props) => {
         caption,
         data=[],
     } = props
+
+    const cellData = typeof data == 'function' ? data() : data
 
     const [ listView, setListView ] = useState(false)
 
@@ -49,7 +51,7 @@ const Component = (props: Props) => {
     }, [])
 
     const theadData = []
-    const tdData = data.map((row) => {
+    const tdData = cellData.map((row: any) => {
         const format = []
 
         for (const name in row) {
@@ -137,7 +139,7 @@ const Component = (props: Props) => {
                                         key={itemKey}
                                         className={`${listFieldClass} ${item.name}`}
                                     >
-                                        {(listView && thead) && (
+                                        {(thead && thead[item.name]) && (
                                             <div className="label">
                                                 {thead[item.name]}
                                             </div>
