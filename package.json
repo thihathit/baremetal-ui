@@ -4,13 +4,12 @@
   "version": "0.1.0",
   "main": "src/components/index.tsx",
   "scripts": {
-    "publish:next": "npm publish --tag @baremetal-ui/next",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public -o docs"
+    "build-storybook": "build-storybook -s public -o docs",
+    "publish:next": "npm publish --tag @baremetal-ui/next"
   },
   "eslintConfig": {
     "extends": "react-app"
