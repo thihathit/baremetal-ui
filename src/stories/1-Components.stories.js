@@ -107,7 +107,7 @@ export const LoadMore = () => {
                 maxWidth: 1000,
                 margin: '0 auto',
                 // padding: 15,
-                maxHeight: 500,
+                maxHeight: 400,
                 backgroundColor: '#000',
 
                 // required for component to attach 'scroll' event
