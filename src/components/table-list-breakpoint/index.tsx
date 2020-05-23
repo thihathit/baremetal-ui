@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react"
 
 export type Thead = {
-    [key: string]: string | number;
+    [key: string]: string;
 }
 
 export interface Props {
-    thead?: Thead;
+    thead?: Thead | ((listView: boolean) => Thead);
 
-    data?: object[] | (() => object[]);
+    data?: object[] | ((listView: boolean) => object[]);
 
-    caption?: string | number | (() => any);
+    caption?: string | ((listView: boolean) => any);
     viewSwitchAt?: number;
     className?: string;
     tableFieldClass?: string;
@@ -27,9 +27,11 @@ const Component = (props: Props) => {
         data=[],
     } = props
 
-    const cellData = typeof data == 'function' ? data() : data
-
     const [ listView, setListView ] = useState(false)
+
+    const captionData = typeof caption == 'function' ? caption(listView) : caption;
+    const headData = typeof thead == 'function' ? thead(listView) : thead;
+    const cellData = typeof data == 'function' ? data(listView) : data
 
     const switchView = useCallback(() => {
         if(window.innerWidth <= viewSwitchAt) {
@@ -65,10 +67,10 @@ const Component = (props: Props) => {
     })
 
     if(thead) {
-        for(const name in thead) {
+        for (const name in headData) {
             theadData.push({
                 name: name,
-                value: thead[name]
+                value: headData[name],
             })
         }
     }
@@ -79,13 +81,13 @@ const Component = (props: Props) => {
                 <table
                     className={`table-list-breakpoint table-view ${className}`}
                 >
-                    {caption &&
+                    {captionData &&
                         <caption>
-                            {typeof caption == 'function' ? caption() : caption}
+                            {captionData}
                         </caption>
                     }
 
-                    {thead &&
+                    {headData &&
                         <thead>
                             <tr>
                                 {theadData.map((head, key) =>
@@ -123,9 +125,9 @@ const Component = (props: Props) => {
                 <div
                     className={`table-list-breakpoint list-view ${className}`}
                 >
-                    {caption &&
+                    {captionData &&
                         <h2 className="list-title">
-                            {typeof caption == 'function' ? caption() : caption}
+                            {captionData}
                         </h2>
                     }
 
@@ -139,9 +141,9 @@ const Component = (props: Props) => {
                                         key={itemKey}
                                         className={`${listFieldClass} ${item.name}`}
                                     >
-                                        {(thead && thead[item.name]) && (
+                                        {(headData && headData[item.name]) && (
                                             <div className="label">
-                                                {thead[item.name]}
+                                                {headData[item.name]}
                                             </div>
                                         )}
 
