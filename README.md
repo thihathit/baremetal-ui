@@ -36,11 +36,17 @@ Build storybook static documentation for `github pages`
   - [ ] Tag latest development release `@baremetal-ui/next` 
 - [ ] Develop Components
   - [ ] Tabs & Tab contents
+  - [ ] Form elements
+    - [x] file
+      - [x] forwardRef
+      - [x] multiple / single
+      - [x] programmatic control
+        - [ ] stable
   - [ ] Modal
     - [ ] expose ref
   - [ ] Loader
     - [ ] fullpage
     - [ ] inline
     - [ ] icon
-      - [ ] default  as animated svg from `buefy`
+      - [ ] default  as animated svg
       - [ ] accept custom icon via function prop
