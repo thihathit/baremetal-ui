@@ -60,18 +60,20 @@ const Component: React.FC<Props> = ({
 			const Scroller = getScrollParent(Container.current);
 
 			const onScroll = (Ev: any) => {
-				Throttle(() => {
-                    const ScrollerRect = Scroller.getBoundingClientRect();
-					const TargetRect = Container.current.getBoundingClientRect();
-                    const TargetTop = TargetRect.top - ScrollerRect.top;
-                    const TargetBottom = TargetTop + Container.current.offsetHeight;
+                    const ScrollerTop = Scroller !== window ? Scroller.getBoundingClientRect().top : Scroller.pageYOffset
+                    const ScrollerHeight = Scroller !== window ? Scroller.offsetHeight : Scroller.innerHeight
 
-                    const scrollableDistance = TargetBottom - Scroller.offsetHeight;
+					const TargetRect = Container.current.getBoundingClientRect();
+					const TargetRealTop = TargetRect.top - ScrollerTop;
+					const TargetBottom = TargetRealTop + Container.current.offsetHeight;
+
+					const scrollableDistance = TargetBottom - ScrollerHeight;
 
 					if (scrollableDistance <= distance) {
-						onLoad();
+                        Throttle(() => {
+    						onLoad();
+                        }, throttle);
 					}
-				}, throttle);
 			};
 
 			Scroller.addEventListener('scroll', onScroll);
@@ -82,7 +84,7 @@ const Component: React.FC<Props> = ({
                 onDestroy()
 			};
 		}
-	}, []);
+	}, [children, distance]);
 
 	return (
         <div className={className} ref={Container}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { withA11y } from '@storybook/addon-a11y'
 
 import * as Components from '../components';
@@ -103,6 +103,8 @@ export const LoadMore = () => {
 
     return (
         <div
+            className="scrollable-wrapper"
+            tabindex="0"
             style={{
                 maxWidth: 1000,
                 margin: '0 auto',
@@ -113,7 +115,6 @@ export const LoadMore = () => {
                 // required for component to attach 'scroll' event
                 overflowY: 'auto'
             }}
-            className="scrollable-wrapper"
         >
             <Components.LoadMore
                 distance={30}
@@ -141,5 +142,101 @@ export const LoadMore = () => {
                 </div>
             </Components.LoadMore>
         </div>
+    )
+};
+
+export const File = () => {
+    const Instance = useRef()
+    const [selectedFiles, updateSelectedFiles] = useState(null)
+
+    return (
+        <>
+            <section>
+                <h2>Default Template</h2>
+
+                <Components.File
+                    onChange={(files) => {
+                    }}
+                />
+            </section>
+
+            <hr/>
+
+            <section>
+                <h2>Custom Template</h2>
+
+                <Components.File
+                    multiple={true}
+
+                    onChange={(files) => {
+                    }}
+                >
+                    {({files, open, input}) => (
+                        <fieldset>
+                            <legend>
+                                <button onClick={open}>Choose</button>
+                            </legend>
+
+                            {files && Array.from(files).map((file, key) => (
+                                <div
+                                    key={key}
+                                    style={{
+                                        backgroundColor: 'red',
+                                        color: '#fff',
+                                        padding: 2,
+                                        margin: 2,
+                                    }}
+                                >
+                                    {file.name}
+                                </div>
+                            ))}
+                        </fieldset>
+                    )}
+                </Components.File>
+            </section>
+
+            <hr/>
+
+            <section>
+                <h2>Programmatic Control: [EXPERIMENTAL]</h2>
+
+                <div style={{ display: 'none' }}>
+                    <Components.File
+                        ref={Instance}
+                        onChange={(files) => {
+                            updateSelectedFiles(files)
+                        }}
+                    />
+                </div>
+
+                <button
+                    onClick={() => {
+                        if(Instance.current) {
+                            Instance.current.open()
+                        }
+                    }}
+                >
+                    Choose
+                </button>
+
+                <button
+                    onClick={() => {
+                        if(Instance.current) {
+                            Instance.current.reset()
+                        }
+                    }}
+                >
+                    Clear
+                </button>
+
+                <div className="info">
+                    {selectedFiles && Array.from(selectedFiles).map((file, key) => (
+                        <div key={key}>
+                            {file.name}
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </>
     )
 };
