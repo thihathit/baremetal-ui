@@ -36,6 +36,8 @@ Build storybook static documentation for `github pages`
   - [ ] Tag latest development release `@baremetal-ui/next` 
 - [ ] Develop Components
   - [ ] Tabs & Tab contents
+  - [x] scroll more
+    - [x] scroll event attach to any scrollable parent
   - [ ] Form elements
     - [x] file
       - [x] forwardRef
@@ -44,9 +46,9 @@ Build storybook static documentation for `github pages`
         - [ ] stable
   - [ ] Modal
     - [ ] expose ref
-  - [ ] Loader
-    - [ ] fullpage
-    - [ ] inline
-    - [ ] icon
-      - [ ] default  as animated svg
-      - [ ] accept custom icon via function prop
+  - [x] Loader
+    - [x] fullpage
+    - [x] inline
+    - [x] icon
+      - [x] default  as animated svg
+      - [x] custom icon as children

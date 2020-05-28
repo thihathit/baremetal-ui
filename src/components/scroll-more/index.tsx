@@ -48,7 +48,7 @@ const Component: React.FC<Props> = ({
 	children,
 	distance,
 	throttle = 100,
-    className = 'loadmore',
+    className = 'scroll-more',
 	onLoad,
 	onDestroy = () => undefined,
 }) => {
@@ -93,6 +93,6 @@ const Component: React.FC<Props> = ({
 	);
 };
 
-Component.displayName = 'LoadMore'
+Component.displayName = 'ScrollMore'
 
 export default Component;
