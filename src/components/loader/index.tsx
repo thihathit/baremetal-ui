@@ -16,7 +16,7 @@ const Component: React.FC<Props> = React.memo(({
 	fullPage = false,
 }) => {
     const containerClasses = ['loader']
-    let allContainerStyles = containerStyle
+    let allContainerStyles: Props['containerStyle'] = containerStyle
 
     if(fullPage) {
         containerClasses.push('fullpage')
@@ -32,7 +32,7 @@ const Component: React.FC<Props> = React.memo(({
             justifyContent: 'center',
             backgroundColor: 'rgba(255, 255, 255, 0.7)',
             zIndex: 9999999,
-            position: 'fixed' as 'fixed',
+            position: 'fixed',
 
             ...containerStyle
         }
