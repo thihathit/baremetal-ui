@@ -1,9 +1,14 @@
 import React, { useRef, ReactNode, useEffect, useState, forwardRef } from 'react';
 
+export interface Selected {
+    files: FileList;
+}
+
 export interface ChildrenProps {
-    files: FileList | null,
+    files: Selected['files'] | null,
     open: () => void,
-    input: any,
+    reset?: () => void;
+    input?: any,
 }
 
 export interface ComponentProps {
@@ -11,7 +16,7 @@ export interface ComponentProps {
     accept?: string;
 	className?: string;
     children?: (props: ChildrenProps) => ReactNode;
-    onChange: (files: FileList | null) => void;
+    onChange: (files: ChildrenProps['files']) => void;
 }
 
 const Component: React.FC<ComponentProps> = forwardRef(({
@@ -21,13 +26,19 @@ const Component: React.FC<ComponentProps> = forwardRef(({
     children,
     onChange,
 }, ref: any) => {
-    const [selectedFiles, updateSelectedFiles] = useState<FileList | null>(null)
+    const [selected, updateSelected] = useState<Selected | null>(null)
 	const fileRef: any = useRef(null);
+
+    const getSelectedFiles = () => {
+        return selected ? selected.files : null;
+    };
 
     const onFileSelect = (e: any) => {
         const files = e.target.files
 
-        updateSelectedFiles(files)
+        updateSelected({
+            files: files
+        })
     }
 
     const openFileSelect = () => {
@@ -41,7 +52,7 @@ const Component: React.FC<ComponentProps> = forwardRef(({
             fileRef.current.value = null
         }
 
-        updateSelectedFiles(null)
+        updateSelected(null)
     }
 
     const getMethods = () => ({
@@ -51,8 +62,8 @@ const Component: React.FC<ComponentProps> = forwardRef(({
     })
 
     useEffect(() => {
-        onChange(selectedFiles)
-    }, [selectedFiles])
+        onChange(getSelectedFiles())
+    }, [selected])
 
     useEffect(() => {
         if(ref) {
@@ -65,7 +76,7 @@ const Component: React.FC<ComponentProps> = forwardRef(({
             {children &&
                 children({
                     ...getMethods(),
-                    files: selectedFiles,
+                    files: getSelectedFiles(),
                 })
             }
 
@@ -78,13 +89,15 @@ const Component: React.FC<ComponentProps> = forwardRef(({
                         Choose file
                     </button>
 
-                    <div className="info">
-                        {selectedFiles && Array.from(selectedFiles).map((file, key) => (
-                            <div key={key}>
-                                {file.name}
-                            </div>
-                        ))}
-                    </div>
+                    {selected &&
+                        <div className="info">
+                            {Array.from(selected.files).map((file, key) => (
+                                <div key={key}>
+                                    {file.name}
+                                </div>
+                            ))}
+                        </div>
+                    }
                 </>
             }
 
