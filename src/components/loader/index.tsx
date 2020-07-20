@@ -8,7 +8,7 @@ export interface Props {
 	containerStyle?: React.CSSProperties;
 }
 
-const Component: React.FC<Props> = React.memo(({
+const Component: React.FC<Props> = ({
 	active,
 	children,
 	color = '#000',
@@ -83,8 +83,10 @@ const Component: React.FC<Props> = React.memo(({
 			)}
 		</>
 	);
-});
+};
 
-Component.displayName = 'Loader'
+const ComponentCache = React.memo(Component)
 
-export default Component;
+ComponentCache.displayName = 'Loader'
+
+export default ComponentCache;
