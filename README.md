@@ -6,25 +6,9 @@ Cleanest react ui components. Focus only on crafting complicated components with
 
 
 
-## Development Scripts
+## Contribution
 
-In the project directory, you can run:
-
-### `yarn storybook`
-
-Runs the app in the development mode & Start developing under `/src/components`.<br />
-Open [http://localhost:9009](http://localhost:9009) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn build`
-
-Builds the app for production.
-
-### `yarn build-storybook`
-
-Build storybook static documentation for `github pages` 
+### `yarn dev`
 
 
 
