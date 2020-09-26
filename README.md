@@ -18,8 +18,7 @@ All components are standalone and written in typescript, so if your project use 
 
 - [ ] remove unused files that comes from `CRP`
 - [ ] Implement unit test
-- [ ] publish on `npm`
-  - [ ] Tag latest development release `@baremetal-ui/next` 
+- [x] publish on `npm`
 - [ ] Develop Components
   - [ ] Tabs & Tab contents
   - [x] scroll more
