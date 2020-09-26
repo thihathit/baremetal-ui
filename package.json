@@ -18,6 +18,11 @@
     "test:coverage": "jest --coverage --colors --maxWorkers=2"
   },
   "main": "lib.cjs.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thihathit/baremetal-ui.git"
+  },
+  "homepage": "https://baremetal-ui.netlify.app",
   "module": "lib.esm.js",
   "browser": "lib.umd.js",
   "types": "index.d.ts",
