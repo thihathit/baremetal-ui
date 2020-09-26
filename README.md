@@ -2,6 +2,8 @@
 
 Cleanest react ui components. Focus only on crafting complicated components with zero to almost no CSS for any project's custom styling.
 
+All components are standalone and written in typescript, so if your project use typescript, you can just copy component folder and use them as it is rather than installing the whole package.
+
 **Note:** This project is under development.
 
 
