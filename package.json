@@ -1,7 +1,7 @@
 {
   "name": "baremetal-ui",
   "description": "Cleanest react ui components",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "build": "yarn clean && rollup -c && yarn postBuild",
     "postBuild": "node ./scripts/postBuild",
