@@ -3,11 +3,11 @@ import React, { useRef, useEffect } from 'react';
 let ThrottleTimer: any = null;
 
 export interface Props {
-	distance: number;
-	throttle?: number;
-	className?: string;
-	onLoad: () => void;
-	onDestroy?: () => void;
+  distance: number;
+  throttle?: number;
+  className?: string;
+  onLoad: () => void;
+  onDestroy?: () => void;
 }
 
 /**
@@ -16,19 +16,18 @@ export interface Props {
  * @return {DOM}            the first scroll parent
  */
 const getScrollParent = (elm: any): any => {
-	const elmStyles = getComputedStyle(elm);
+  const elmStyles = getComputedStyle(elm);
 
-	if (elm.tagName === 'BODY') {
-		return window;
-	} else if (
-		elm.scrollHeight !== elm.offsetHeight
-        &&
-		['scroll', 'auto'].indexOf(elmStyles.overflowY) == 1
-	) {
-		return elm;
-	}
+  if (elm.tagName === 'BODY') {
+    return window;
+  } else if (
+    elm.scrollHeight !== elm.offsetHeight &&
+    ['scroll', 'auto'].indexOf(elmStyles.overflowY) == 1
+  ) {
+    return elm;
+  }
 
-	return getScrollParent(elm.parentNode);
+  return getScrollParent(elm.parentNode);
 };
 
 /**
@@ -37,62 +36,66 @@ const getScrollParent = (elm: any): any => {
  * @param  {NUMBER} ms      Delaly before process
  */
 const Throttle = (fn: () => void, ms: number) => {
-	clearTimeout(ThrottleTimer);
+  clearTimeout(ThrottleTimer);
 
-	ThrottleTimer = setTimeout(() => {
-		fn();
-	}, ms);
+  ThrottleTimer = setTimeout(() => {
+    fn();
+  }, ms);
 };
 
 const Component: React.FC<Props> = ({
-	children,
-	distance,
-	throttle = 100,
-    className = 'scroll-more',
-	onLoad,
-	onDestroy = () => undefined,
+  children,
+  distance,
+  throttle = 100,
+  className = 'scroll-more',
+  onLoad,
+  onDestroy = () => undefined,
 }) => {
-	const Container: any = useRef();
+  const Container: any = useRef();
 
-	useEffect(() => {
-		// no server side
-		if (window) {
-			const Scroller = getScrollParent(Container.current);
+  useEffect(() => {
+    // no server side
+    if (window) {
+      const Scroller = getScrollParent(Container.current);
 
-			const onScroll = (Ev: any) => {
-                    const ScrollerTop = Scroller !== window ? Scroller.getBoundingClientRect().top : Scroller.pageYOffset
-                    const ScrollerHeight = Scroller !== window ? Scroller.offsetHeight : Scroller.innerHeight
+      const onScroll = (Ev: any) => {
+        const ScrollerTop =
+          Scroller !== window
+            ? Scroller.getBoundingClientRect().top
+            : Scroller.pageYOffset;
+        const ScrollerHeight =
+          Scroller !== window ? Scroller.offsetHeight : Scroller.innerHeight;
 
-					const TargetRect = Container.current.getBoundingClientRect();
-					const TargetRealTop = TargetRect.top - ScrollerTop;
-					const TargetBottom = TargetRealTop + Container.current.offsetHeight;
+        const TargetRect = Container.current.getBoundingClientRect();
+        const TargetRealTop = TargetRect.top - ScrollerTop;
+        const TargetBottom = TargetRealTop + Container.current.offsetHeight;
 
-					const scrollableDistance = TargetBottom - ScrollerHeight;
+        const scrollableDistance = TargetBottom - ScrollerHeight;
 
-					if (scrollableDistance <= distance) {
-                        Throttle(() => {
-    						onLoad();
-                        }, throttle);
-					}
-			};
+        if (scrollableDistance <= distance) {
+          Throttle(() => {
+            onLoad();
+          }, throttle);
+        }
+      };
 
-			Scroller.addEventListener('scroll', onScroll);
+      Scroller.addEventListener('scroll', onScroll);
 
-			return () => {
-				Scroller.removeEventListener('scroll', onScroll);
+      return () => {
+        Scroller.removeEventListener('scroll', onScroll);
 
-                onDestroy()
-			};
-		}
-	}, [children, distance]);
+        onDestroy();
+      };
+    }
+  }, [children, distance]);
 
-	return (
-        <div className={className} ref={Container}>
-            {children}
-        </div>
-	);
+  return (
+    <div className={className} ref={Container}>
+      {children}
+    </div>
+  );
 };
 
-Component.displayName = 'ScrollMore'
+Component.displayName = 'ScrollMore';
 
 export default Component;

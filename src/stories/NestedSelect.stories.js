@@ -1,59 +1,59 @@
 import React from 'react';
-import { withA11y } from '@storybook/addon-a11y'
+import { withA11y } from '@storybook/addon-a11y';
 
 import { NestedSelect } from '../components';
 
 export default {
-    title: NestedSelect.displayName,
-    component: NestedSelect,
-    decorators: [ withA11y ],
+  title: NestedSelect.displayName,
+  component: NestedSelect,
+  decorators: [withA11y],
 };
 
 export const Default = () => (
-    <>
-        <NestedSelect
-            defaultValue={{
-                data: {
-                    label: 'N2 Ch1'
-                },
-                id: 'id-xxxx'
-            }}
-            options={[
+  <>
+    <NestedSelect
+      defaultValue={{
+        data: {
+          label: 'N2 Ch1',
+        },
+        id: 'id-xxxx',
+      }}
+      options={[
+        {
+          data: {
+            label: 'Item 1',
+          },
+          options: [
+            {
+              data: {
+                label: 'N1 Ch1',
+              },
+            },
+            {
+              data: {
+                label: 'N1 Ch2',
+              },
+              options: [
                 {
-                    data: {
-                        label: 'Item 1',
-                    },
-                    options: [
-                        {
-                            data: {
-                                label: 'N1 Ch1'
-                            },
-                        },
-                        {
-                            data: {
-                                label: 'N1 Ch2'
-                            },
-                            options: [
-                                {
-                                    data: {
-                                        label: 'N2 Ch1'
-                                    },
-                                    isDisabled: true,
-                                    id: 'id-xxxx'
-                                },
-                            ]
-                        },
-                    ]
+                  data: {
+                    label: 'N2 Ch1',
+                  },
+                  isDisabled: true,
+                  id: 'id-xxxx',
                 },
-                {
-                    data: {
-                        label: 'Item 2'
-                    },
-                },
-            ]}
-        />
+              ],
+            },
+          ],
+        },
+        {
+          data: {
+            label: 'Item 2',
+          },
+        },
+      ]}
+    />
 
-        <style>{`
+    <style>{`
             .control {
                 border: 1px solid #000;
                 cursor: pointer;
@@ -75,6 +75,6 @@ export const Default = () => (
                 cursor: not-allowed;
             }
         `}</style>
-    </>
-)
-Default.displayName = 'Default'
+  </>
+);
+Default.displayName = 'Default';
