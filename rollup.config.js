@@ -28,13 +28,13 @@ export default {
       globals,
       sourcemap: true,
     },
-    {
-      file: `./dist/${pkg.browser}`,
-      format: 'iife',
-      name: 'lib',
-      globals,
-      sourcemap: true,
-    },
+    // {
+    //   file: `./dist/${pkg.browser}`,
+    //   format: 'iife',
+    //   name: 'lib',
+    //   globals,
+    //   sourcemap: true,
+    // },
   ],
   plugins: [commonjs(), postcss(), typescript(), terser()],
 };
