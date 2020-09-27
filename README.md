@@ -6,7 +6,9 @@ All components are standalone and written in typescript, so if your project use 
 
 **Note:** This project is under development.
 
+## NPM
 
+`yarn add baremetal-ui` or `npm i baremetal-ui`
 
 ## Contribution
 
