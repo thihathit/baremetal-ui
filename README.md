@@ -18,7 +18,7 @@ All components are standalone and written in typescript, so if your project use 
 
 ## Roadmap
 
-- [ ] remove unused files that comes from `CRP`
+- [x] remove unused files that comes from `CRP`
 - [ ] Implement unit test
 - [x] publish on `npm`
 - [ ] Develop Components
@@ -33,8 +33,6 @@ All components are standalone and written in typescript, so if your project use 
       - [x] multiple / single
       - [x] programmatic control
         - [ ] stable
-  - [ ] Modal
-    - [ ] expose ref
   - [x] Loader
     - [x] fullpage
     - [x] inline
