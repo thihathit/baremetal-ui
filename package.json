@@ -1,7 +1,7 @@
 {
   "name": "baremetal-ui",
   "description": "Cleanest react ui components",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "scripts": {
     "build": "yarn clean && rollup -c && yarn postBuild",
     "postBuild": "node ./scripts/postBuild",
@@ -26,7 +26,7 @@
   "module": "lib.esm.js",
   "browser": "lib.umd.js",
   "types": "index.d.ts",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
