@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 
 export interface Selected {
-  files: FileList;
+  files: File[];
 }
 
 export interface ChildrenProps {
@@ -35,7 +35,7 @@ const Component: React.FC<ComponentProps> = forwardRef(
     };
 
     const onFileSelect = (e: any) => {
-      const files = e.target.files;
+      const files = [...e.target.files];
 
       updateSelected({
         files: files,

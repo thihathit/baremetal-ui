@@ -21,7 +21,7 @@ export const Custom = () => (
         </legend>
 
         {files &&
-          Array.from(files).map((file, key) => (
+          files.map((file, key) => (
             <div
               key={key}
               style={{
@@ -77,9 +77,7 @@ export const Programmatic = () => {
 
       <div className="info">
         {selectedFiles &&
-          Array.from(selectedFiles).map((file, key) => (
-            <div key={key}>{file.name}</div>
-          ))}
+          selectedFiles.map((file, key) => <div key={key}>{file.name}</div>)}
       </div>
     </>
   );
